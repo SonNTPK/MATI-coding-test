@@ -1,13 +1,17 @@
-import { colors, createTheme } from '@mui/material';
+import { PaletteColor, colors, createTheme } from '@mui/material';
+
+interface BgColor extends PaletteColor {
+  dragOver: string;
+}
 
 declare module '@mui/material/styles' {
   interface Palette {
-    bgColor: Palette['primary'];
+    bgColor: BgColor;
   }
 
   // allow configuration using `createTheme`
   interface PaletteOptions {
-    bgColor?: PaletteOptions['primary'];
+    bgColor?: PaletteOptions['primary'] & { dragOver: string };
   }
 }
 
@@ -18,6 +22,7 @@ export const theme = createTheme({
     },
     bgColor: {
       main: colors.grey[200],
+      dragOver: colors.purple[300],
     },
   },
 });
