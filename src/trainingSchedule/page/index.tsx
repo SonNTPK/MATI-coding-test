@@ -31,30 +31,28 @@ const TrainingSchedule = (props: Props) => {
     const startColumn = source.droppableId;
     const endColumn = destination.droppableId;
     if (startColumn !== endColumn) {
-      const startIndex = sessions.findIndex(
-        (session) => session.id === draggableId,
+      const sessionsOfDay = sessions.filter((item) =>
+        moment(item.date).isSame(moment(+endColumn), 'day'),
       );
-      if (startIndex < 0) return;
-      sessions[startIndex].date = moment(+endColumn).toString();
-      const newSessions = structuredClone(sessions);
-      setSessions(newSessions);
-      return;
+      sessions[source.index - 1].date = moment(+endColumn).toString();
+      if (!sessionsOfDay.length) {
+        setSessions([...sessions]);
+        return;
+      }
     }
-    const sourceStart = sessions[source.index];
-    sessions.splice(source.index, 1);
-    sessions.splice(destination.index, 0, {
-      ...sourceStart,
-      orderNo: sourceStart.orderNo,
-    });
-    const newSession = structuredClone(sessions);
-    setSessions(newSession);
+    const sourceStart = sessions[source.index - 1];
+    const sourceEnd = sessions[destination.index - 1];
+    sessions.splice(destination.index - 1, 1, { ...sourceStart });
+    sessions.splice(source.index - 1, 1, { ...sourceEnd });
+    setSessions([...sessions]);
   };
 
   return (
     <DragDropContext onDragEnd={handleDragEnd}>
       <Stack
+        padding='1rem 0'
         overflow='scroll'
-        height={'100vh'}
+        height='100%'
         width='100%'
         alignItems='stretch'
         direction='row'

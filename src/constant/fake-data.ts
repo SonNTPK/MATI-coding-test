@@ -15,7 +15,18 @@ export const workoutList: Workout[] = [
     date: moment().isoWeekday(1).toString(),
     id: uuidv4(),
     name: 'Chest course day 2 Chest course day 1',
-    exercises: null,
+    exercises: [
+      {
+        name: 'Exercise 1',
+        setInformation: '50 lb x 9, 60 lb x 7, 70 lb x 5',
+        number: 2,
+      },
+      {
+        name: 'Exercise 2',
+        setInformation: '60 lb x 7, 70 lb x 5',
+        number: 3,
+      },
+    ],
   },
   {
     orderNo: 3,

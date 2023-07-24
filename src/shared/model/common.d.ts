@@ -11,4 +11,5 @@ export interface Workout {
 export interface Exercise {
   name: string;
   setInformation: string;
+  number: number;
 }

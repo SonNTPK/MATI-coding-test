@@ -7,7 +7,7 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline>
-        <Container fixed>
+        <Container maxWidth='xl'>
           <div className='app'>
             <TrainingSchedule></TrainingSchedule>
           </div>
