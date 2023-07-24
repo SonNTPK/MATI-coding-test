@@ -53,7 +53,7 @@ const DayContainer = ({ date, sessionList }: Props) => {
                 {...provided.droppableProps}>
                 {sessionList.map((session, index) => (
                   <TrainingContainer
-                    index={index}
+                    index={session.orderNo}
                     key={session.id}
                     {...session}></TrainingContainer>
                 ))}
